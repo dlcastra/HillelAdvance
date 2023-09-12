@@ -1,4 +1,5 @@
 def parse(query: str) -> dict:
+    #TODO make fuction parse
     return {}
 
 
