@@ -1,7 +1,7 @@
 def parse(query: str) -> dict:
     if '?' in query:
         query_parts = query.split('?')
-        take_query_args = query_parts[1]  # Беремо частину пусилання після знаку "?"
+        take_query_args = query_parts[1]  # Беремо частину посилання після знаку "?"
         split_query_args = take_query_args.split('&')  # Якщо в цій частині присутній знак "&", то розбиваємо ще на частини
         query_dict = {}
 
@@ -23,6 +23,14 @@ if __name__ == '__main__':
     assert parse('http://example.com/') == {}
     assert parse('http://example.com/?') == {}
     assert parse('http://example.com/?name=Dima') == {'name': 'Dima'}
+
+    assert (parse('https://example.com/path/to/page?name=ferret&color=purple&ID=909034') ==
+            {'name': 'ferret', 'color': 'purple', 'ID': '909034'})
+    assert parse('http://example.com/name=fetter&color=red') == {}  # В запиті відсутній знак "?", тому вона повертає {}
+    assert parse('') == {} # Відсутнє посилання, фунція повертає {}
+    assert parse('http://example.com/?name=Dima&') == {'name': 'Dima'}
+    assert parse('http://example.com/?name=Dima?') == {'name': 'Dima'}
+
 
 
 def parse_cookie(query: str) -> dict:
