@@ -12,17 +12,17 @@ def parse(query: str) -> dict:
 
 def parse_cookie(query: str) -> dict:
     if '=' in query:
-        query_parts = query.split(';')
+        query_parts = query.split(';')  # Прибераємо ";" в кінці
         query_dict = {}
 
         for attribute in query_parts:
-            attribute = attribute.strip()
+            attribute = attribute.strip()  # Прабераємо пробіли навколо атрибута
 
             if '=' in attribute:
                 attribute_parts = attribute.split('=')
 
                 key = attribute_parts[0]
-                value = attribute_parts[1] if len(attribute_parts) == 2 else '='.join(attribute_parts[1:])
+                value = attribute_parts[1] if len(attribute_parts) == 2 else '='.join(attribute_parts[1:])  # В випадку коли маємо щось подібне до 'name=Dima=User;age=28;' від Dima і до передостаннього слова приєднується "="
                 query_dict[key] = value
 
         # print(query_dict)
